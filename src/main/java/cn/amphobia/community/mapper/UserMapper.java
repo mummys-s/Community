@@ -3,6 +3,8 @@ package cn.amphobia.community.mapper;
 import cn.amphobia.community.model.User;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
 
 /**
  * @author amphobia
@@ -21,4 +23,7 @@ public interface UserMapper {
     @Insert("INSERT INTO user (account_id,name,token,gmt_create,gmt_modified)" +
             "VALUES (#{accountId},#{name},#{token},#{gmtCreate},#{gmtModified})")
     void insert(User user);
+
+    @Select("SELECT * FROM user WHERE token = #{token}")
+    User fingByToken(@Param("token") String token);
 }
